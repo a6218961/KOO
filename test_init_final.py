@@ -1740,50 +1740,31 @@ while True:
 								else :
 									boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (멍 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
 
-				if len(boss_information) == 1:
-					if len(boss_information[0]) != 0:
-						boss_information[0] = "```diff\n" + boss_information[0] + "\n```"
-					else :
-						boss_information[0] = '``` ```'
-
-					embed = discord.Embed(
-							title = "----- 보스탐 정보 -----",
-							description= boss_information[0],
-							color=0x0000ff
-							)
-					embed.add_field(
-							name="----- 미예약 보스 -----",
-							value= temp_bossTimeSTR1,
-							inline = False
-							)
-					
-					await client.get_channel(channel).send( embed=embed, tts=False)
-				else : 
-					embed = discord.Embed(
-							title = "----- 보스탐 정보 -----",
-							description= '```diff\n' + boss_information[0] + '```',
-							color=0x0000ff
-							)
-					await client.get_channel(channel).send( embed=embed, tts=False)
-					for i in range(len(boss_information)-1):
-						if len(boss_information[i+1]) != 0:
-							boss_information[i+1] = "```diff\n" + boss_information[i+1] + "\n```"
-						else :
-							boss_information[i+1] = '``` ```'
-
-						embed = discord.Embed(
-								title = '',
-								description= boss_information[i+1],
-								color=0x0000ff
-								)
-						await client.get_channel(channel).send( embed=embed, tts=False)
-					
-					embed = discord.Embed(
-						title = "----- 미예약 보스 -----",
-						description= temp_bossTimeSTR1,
+				embed = discord.Embed(
+						title = "----- 보스탐 정보 -----",
+						description= '```diff\n' + boss_information[0] + '```',
 						color=0x0000ff
 						)
+				await client.get_channel(channel).send( embed=embed, tts=False)
+				for i in range(len(boss_information)-1):
+					if len(boss_information[i+1]) != 0:
+						boss_information[i+1] = "```diff\n" + boss_information[i+1] + "\n```"
+					else :
+						boss_information[i+1] = '``` ```'
+
+					embed = discord.Embed(
+							title = '',
+							description= boss_information[i+1],
+							color=0x0000ff
+							)
 					await client.get_channel(channel).send( embed=embed, tts=False)
+
+				embed = discord.Embed(
+					title = "----- 미예약 보스 -----",
+					description= temp_bossTimeSTR1,
+					color=0x0000ff
+					)
+				await client.get_channel(channel).send( embed=embed, tts=False)
 
 				await dbSave()
 
